@@ -47,4 +47,4 @@ if __name__ == '__main__':
     
     print("Average time taken:", calcSum(time_arr)/100)
     print("Minimum time taken:", min(time_arr))
-    print("Minimum time taken:", max(time_arr)
+    print("Minimum time taken:", max(time_arr))
