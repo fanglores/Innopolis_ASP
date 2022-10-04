@@ -32,7 +32,7 @@ if __name__ == '__main__':
     time_arr = []
     
     for i in range(100):
-        a = initListWithRandomNumbers()
+        a = initListWithRandomNumbers(1000)
 
         # starting time
         start = time.time()
