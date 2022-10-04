@@ -11,15 +11,23 @@
 def calcHist(tdata):
 #   hist is a List to store histogram. It contains [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     hist = [0]*10
-#   TODO
-#   Calculate histogram for tdata List
-#   hist [0] = number of values in tdata from 0..99 
-#   hist [1] = number of values in tdata from 100..199
-#   hist [2] = number of values in tdata from 200..299
-#   ...
-#   hist [9] = number of values in tdata from 900..sys.maxint
+    
+    for i in tdata:
+        ind = i // 100
+        if (ind > 9): ind = 9
+            
+        hist[ind] += 1
+
     return hist
-#   data contains List with size 1000 000 with 0 values
-data = [0]*1000000
-a = calcHist(data)
-print(a)
+
+if __name__ == '__main__':
+    #   data contains List with size 1 000 000 with 0 values
+    data = [0]*1000000
+    
+    # init data with randow values
+    for i in data:
+        i = random.randint(0, 999)
+    
+    # execute function
+    a = calcHist(data)
+    print(a)
