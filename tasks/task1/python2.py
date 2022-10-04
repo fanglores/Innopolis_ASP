@@ -11,24 +11,40 @@
 import time
 import random
 
-def initListWithRandomNumbers():
-    rand_list=[]
-    n = 1000
-    for i in range(n):
-        rand_list.append(random.randint(0,999))
+def initListWithRandomNumbers(size):
+    rand_list = []
+    
+    for i in range(size):
+        rand_list.append(random.randint(0, 999))
+        
     return rand_list
 
-def calcSumm(arr):
+def calcSum(arr):
     summ = 0
+    
     for val in arr:
-        summ = summ + val
+        summ += val
+        
     return summ
 
-a = initListWithRandomNumbers()
-# starting time
-start = time.time()
-calcSumm(a)
-# end time
-end = time.time()
-# total time taken
-print("Runtime of the calcSumm is ",(end - start))
+
+if __name__ == '__main__':
+    time_arr = []
+    
+    for i in range(100):
+        a = initListWithRandomNumbers()
+
+        # starting time
+        start = time.time()
+
+        calcSum(a)
+
+        # end time
+        end = time.time()
+
+        # total time taken
+        time_arr.append(end - start)
+    
+    print("Average time taken:", calcSum(time_arr)/100)
+    print("Minimum time taken:", min(time_arr))
+    print("Minimum time taken:", max(time_arr)
