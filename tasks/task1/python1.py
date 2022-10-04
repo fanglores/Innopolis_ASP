@@ -8,6 +8,9 @@
 5. Выложить проект на github, прислать ссылку    
 '''
 
+import time
+import random
+
 def calcHist(tdata):
 #   hist is a List to store histogram. It contains [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     hist = [0]*10
@@ -21,6 +24,8 @@ def calcHist(tdata):
     return hist
 
 if __name__ == '__main__':
+    random.seed(time.time())
+    
     #   data contains List with size 1 000 000 with 0 values
     data = [0]*1000000
     
