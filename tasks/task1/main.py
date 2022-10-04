@@ -40,7 +40,7 @@ if __name__ == '__main__':
         a = initListWithRandomNumbers(arr_size)
 
         start = time.time()
-        calcHist(a)
+        a = calcHist(a)
         end = time.time()
 
         time_arr.append(end - start)
