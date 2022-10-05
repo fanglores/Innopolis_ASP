@@ -19,15 +19,8 @@ def calcHist(tdata):
         hist[ind] += 1
 
     return hist
+ 
 
-def calcSum(arr):
-    summ = 0
-    
-    for val in arr:
-        summ += val
-        
-    return summ
-  
 if __name__ == '__main__':
     random.seed(time.time())
     
@@ -36,9 +29,9 @@ if __name__ == '__main__':
     
     a = []
     time_arr = []
-    for i in range(num):
-        a = initListWithRandomNumbers(arr_size)
 
+    a = initListWithRandomNumbers(arr_size) 
+    for i in range(num):
         start = time.time()
         a = calcHist(a)
         end = time.time()
@@ -46,6 +39,6 @@ if __name__ == '__main__':
         time_arr.append(end - start)
     
     print("Latest given histogram:", a)
-    print("\nAverage time taken:", calcSum(time_arr)/num)
+    print("\nAverage time taken:", mean(time_arr))
     print("Minimum time taken:", min(time_arr))
     print("Minimum time taken:", max(time_arr))
