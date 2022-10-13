@@ -25,6 +25,26 @@ def histDistance(h1, h2) -> float:
             
         return sum**0.5
 
+def readHist(path, separator = ','):
+    f = open(path, "r")
+    
+    line = f.readline()
+    if(not line):
+        print('[WARNING] The file seems empty.')
+        return -1
+    hist = [int(x) for x in line.split(separator)]
+    
+    f.close()
+    return hist
+
+def writeHist(path, h, separator = ','):
+    f = open(path, "w")
+
+    line = [str(x) for x in h]
+    line = separator.join(line)
+    f.write(line)
+    
+    f.close()
 
 
 if __name__ == '__main__':
@@ -33,12 +53,11 @@ if __name__ == '__main__':
     print('\n\n')
     
     print('histDistance([1,2,3], [0,0,0])^2:', histDistance([1,2,3], [0,0,0])**2, '\n\n')
-  
-  
-  
-  
-  
-  
-  
-  
+
+    path = "C:\\txt.txt"
+    print('Read histogram:', readHist(path))
+    t_hist = [0,3,2,1]
+    print('Wrote histogram:', t_hist)
+    writeHist(path, t_hist)
+    print('Read histogram:', readHist(path)) 
   
