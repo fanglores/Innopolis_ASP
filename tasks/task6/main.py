@@ -11,6 +11,11 @@
 import sys
 import os
 import cv2
+import paho.mqtt.client as mqtt
+
+ip_to = "127.0.0.1"
+port_to = 1883
+topic_to = "test/topic"
 
 WINDOW_NAME = 'OpenCV feat. MQTT'
 RECTS = []
@@ -41,7 +46,11 @@ if __name__ == '__main__':
     cv2.namedWindow(WINDOW_NAME)
     cv2.setMouseCallback(WINDOW_NAME, click_event)
 
+    client = mqtt.Client("publisher")
+    client.connect(ip_to, port_to)
+
     while cv2.getWindowProperty(WINDOW_NAME, 0) >= 0:
+        client.publish(topic_to, '\n'.join(RECTS))
         draw_all_rects(img)
         cv2.imshow(WINDOW_NAME, img)
 
