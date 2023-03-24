@@ -1,3 +1,5 @@
+import enum
+
 import cv2
 import numpy as np
 
@@ -5,10 +7,16 @@ import numpy as np
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
 
 # objects to search
-CLASSES = ["person", "bottle"]
+CLASSES = {
+    0: 'person',
+    39: 'bottle'
+}
 
 # colours for outline
-COLOURS = [(0, 255, 0), (255, 0, 0)]
+COLOURS = {
+    0: (0, 255, 0),
+    39: (255, 0, 0)
+}
 FPS_LIMIT = 1
 CONFIDENCE = 0.5
 THRESHOLD = 0.3
@@ -38,10 +46,7 @@ def main():
                 classID = np.argmax(scores)
                 confidence = scores[classID]
 
-                try:
-                    CLASSES[classID]
-                except IndexError:
-                    print(classID)
+                if CLASSES.get(classID) is None:
                     continue
 
                 if confidence > CONFIDENCE:
@@ -65,14 +70,14 @@ def main():
                 (x, y) = (boxes[i][0], boxes[i][1])
                 (w, h) = (boxes[i][2], boxes[i][3])
 
-                if CLASSES[classIDs[i]] == 'person':
+                if CLASSES.get(classIDs[i]) == 'person':
                     persons_rects.append((x, y, w, h))
                 else:
                     bottles_rects.append((x, y, w, h))
 
-                color = [int(c) for c in COLOURS[classIDs[i]]]
+                color = [int(c) for c in COLOURS.get(classIDs[i])]
                 cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
-                text = "{}: {:.2f}".format(CLASSES[classIDs[i]], confidences[i])
+                text = "{}: {:.2f}".format(CLASSES.get(classIDs[i]), confidences[i])
                 cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
         for bottle in bottles_rects:
@@ -81,7 +86,7 @@ def main():
                 px, py, pw, ph = person
                 if (bx < px + pw) and (bx + bw > px) and (by < py + ph) and (by + bh > py):
                     print('a sip of water')
-                    cv2.putText(frame, 'Blurp blurp', (px, py - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+                    cv2.putText(frame, 'Blurp blurp', (px + 200, py - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 2)
 
         cv2.imshow("Frame", frame)
 
