@@ -1,5 +1,8 @@
 .idea/
 
+tasks_sem2/practice_2/yolov3.cfg
+tasks_sem2/practice_2/yolov3.weights
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
